@@ -27,10 +27,10 @@ void quicksort(T(&array)[N], T *l, T *r, std::function<bool(T*, T*)> comp) {
     T* z = (l + (r - l) / 2);
     T* ll = l;
     T* rr = r;
-    while (ll <= rr) { //  не получается заменить на функцию comp. Выдаёт std::bad_function_call ((
+    while (ll <= rr) {
         while (*ll < *z) ll++;
         while (*rr > *z) rr--;
-        if (ll <= rr) {
+        if (comp) {
             std::swap(*ll, *rr);
             ll++;
             rr--;
@@ -46,27 +46,24 @@ bool comp(T* l, T* r) {
 }
 
 int main() {
-    std::function<bool(int*, int*)> comp1 = comp1;
     int array1[] = { 51, 2, 10, 15, 30, 20};
-    sort<int, 6>(array1,  comp1 );
+    sort<int, 6>(array1,  comp<int>);
     std::cout << std::endl;
     for (auto elem: array1) {
         std::cout << elem << " ";
     }
     std::cout << std::endl;
 
-    std::function<bool(char*, char*)> comp2 = comp2;
     char array2[] = { 'b', 'a', 'c', 'x', 'z'};
-    sort<char, 5>(array2,  comp2 );
+    sort<char, 5>(array2,  comp<char> );
     std::cout << std::endl;
     for (auto elem: array2) {
         std::cout << elem << " ";
     }
     std::cout << std::endl;
 
-    std::function<bool(std::string*, std::string*)> comp3 = comp3;
     std::string array3[] = { "bb", "aa", "cc"};
-    sort<std::string, 3>(array3,  comp3 );
+    sort<std::string, 3>(array3,  comp<std::string> );
     std::cout << std::endl;
     for (auto elem: array3) {
         std::cout << elem << " ";
